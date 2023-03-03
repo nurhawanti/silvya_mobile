@@ -1,12 +1,35 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:silvya/model/ApiService.dart';
+import 'package:silvya/model/keluhan.dart';
+import 'package:silvya/model/pengguna.dart';
+import 'package:silvya/model/sij.dart';
 import 'package:silvya/shared/shared.dart';
+import 'package:silvya/model/user.dart';
+import 'package:silvya/model/user_data.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:icon_badge/icon_badge.dart';
-
+import 'package:silvya/pages/edit_image_page.dart';
+import 'package:silvya/widget/dialogs.dart';
+import 'package:silvya/widget/display_image_widget.dart';
+import 'package:silvya/widget/appbar_widget.dart';
+import 'package:string_validator/string_validator.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:http/http.dart' as http;
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 
 
 part 'welcome_pages.dart';
@@ -19,3 +42,8 @@ part 'pengajuan_sij.dart';
 part 'pesan_makanan.dart';
 part 'pengaduan_keluhan.dart';
 part 'profil_page.dart';
+part 'edit_name_page.dart';
+part 'edit_nim_page.dart';
+part 'scanQr_page.dart';
+part 'list_keluhan.dart';
+part 'list_sij.dart';

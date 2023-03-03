@@ -10,648 +10,200 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
+    final user = UserData.myUser;
+    var heightScreen = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: Icon(CupertinoIcons.back,color: black,),
-      //   actions: [Icon(CupertinoIcons.search,color: black,)],
-      //   backgroundColor: primary,elevation: 0,),
-      backgroundColor: thirdColor,
-      body: getBody(),
-    );
-  }
-
-  Widget getBody() {
-    var size = MediaQuery.of(context).size;
-
-    return SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: heightScreen),
+          child: Stack(
             children: [
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Pengajuan SIJ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: secondaryColor,
-                        )),
-                    // Text("Semua",
-                    //     style: TextStyle(
-                    //       fontWeight: FontWeight.w600,
-                    //       fontSize: 13,
-                    //       color: primaryColor,
-                    //     )),
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                        left: 25,
-                        right: 25,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.amberAccent.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: primaryColor.withOpacity(0.03),
-                              spreadRadius: 10,
-                              blurRadius: 3,
-                              // changes position of shadow
-                            ),
-                          ]),
-                      child:
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, left: 25, right: 10, bottom: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Status Pengajuan SIJ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: primaryColor,
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, bottom: 20, right: 20, left: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  // decoration: BoxDecoration(
-                                  //   color: arrowbgColor,
-                                  //   borderRadius: BorderRadius.circular(15),
-                                  //   // shape: BoxShape.circle
-                                  // ),
-                                  child: Center(
-                                      child: Icon(Icons.file_copy_outlined,color: primaryColor, size: 40,)),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    width: (size.width - 90) * 0.7,
-                                    child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Permohonan Izin Meninggalkan Asrama",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: textDark,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            "Menunggu Persetujuan Ka Prodi",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: textDark.withOpacity(0.5),
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ]),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Riwayat Pengajuan",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: primaryColor,
-                        )),
-                    Text("Semua",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                          color: secondaryColor,
-                        )),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top:5,bottom: 20,left: 25,right: 25),
-                child: Column(children: [
-                  Row(children: [
-                    Container(
-                      padding: EdgeInsets.only(left:25,right: 25,top: 5,bottom: 5),
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                        color:primaryColor, borderRadius: BorderRadius.circular(25),
-
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Menunggu",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left:25,right: 25,top: 5,bottom: 5),
-                      margin: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color:whiteColor, borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: primaryColor.withOpacity(0.03),
-                              spreadRadius: 10,
-                              blurRadius: 3,
-                              // changes position of shadow
-                            )]
-
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Disetujui",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left:25,right: 25,top: 5,bottom: 5),
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          color:whiteColor, borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: primaryColor.withOpacity(0.03),
-                              spreadRadius: 10,
-                              blurRadius: 3,
-                              // changes position of shadow
-                            )]
-
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Ditolak",
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ],)
-                ],),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Container(
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: 5,
-                              left: 25,
-                              right: 25,
-                            ),
-                            decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.03),
-                                    spreadRadius: 10,
-                                    blurRadius: 3,
-                                    // changes position of shadow
-                                  ),
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: (size.width - 90) * 0.7,
-                                      child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Magang",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: textDark,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Pelaksananaan Mahang/PKL",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Tanggal Pengajuan: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Jl. Mayor Zen Kalidoni Kota Palembang Sumatera Selatn",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Berangkat: 16-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Kembali: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
+                    AppBar(
+                      backgroundColor: primaryColor,
+                      elevation: 0,
+                      toolbarHeight: 10,
+                    ),
+                    Center(
+                        child: Padding(
+                            padding: EdgeInsets.only(top: 30, bottom: 30),
+                            child: Text(
+                              'Ubah Profil',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: primaryColor,
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
+                            ))
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: 5,
-                              left: 25,
-                              right: 25,
-                            ),
-                            decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.03),
-                                    spreadRadius: 10,
-                                    blurRadius: 3,
-                                    // changes position of shadow
-                                  ),
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: (size.width - 90) * 0.7,
-                                      child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Cuti",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: textDark,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Pelaksananaan Mahang/PKL",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Tanggal Pengajuan: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Jl. Mayor Zen Kalidoni Kota Palembang Sumatera Selatn",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Berangkat: 16-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Kembali: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: 5,
-                              left: 25,
-                              right: 25,
-                            ),
-                            decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.03),
-                                    spreadRadius: 10,
-                                    blurRadius: 3,
-                                    // changes position of shadow
-                                  ),
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: (size.width - 90) * 0.7,
-                                      child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Sakit",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: textDark,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Pelaksananaan Mahang/PKL",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Tanggal Pengajuan: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Jl. Mayor Zen Kalidoni Kota Palembang Sumatera Selatn",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Berangkat: 16-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Kembali: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: 5,
-                              left: 25,
-                              right: 25,
-                            ),
-                            decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.03),
-                                    spreadRadius: 10,
-                                    blurRadius: 3,
-                                    // changes position of shadow
-                                  ),
-                                ]),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: (size.width - 90) * 0.7,
-                                      child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Liburan",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: textDark,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Pelaksananaan Mahang/PKL",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Tanggal Pengajuan: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.8),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Jl. Mayor Zen Kalidoni Kota Palembang Sumatera Selatn",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Berangkat: 16-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              "Kembali: 18-February-2023 20:00",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: textDark.withOpacity(0.5),
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    InkWell(
+                        onTap: () {
+                          navigateSecondPage(EditImagePage());
+                        },
+                        child: DisplayImage(
+                          imagePath: user.foto,
+                          onPressed: () {},
+                        )),
+                    SizedBox(height: 30),
+                    buildUserInfoDisplay(user.nama, 'Nama', EditNameFormPage(), heightScreen),
+                    buildUserInfoDisplay(user.nim, 'NIM', EditNameFormPage(), heightScreen),
+                    buildUserInfoDisplay(user.tlp, 'No Telp', EditNameFormPage(), heightScreen),
+                    buildUserInfoDisplay(user.email, 'Email', EditNameFormPage(), heightScreen),
+                    buildUserInfoDisplay(user.prodi, 'Program Studi', EditNameFormPage(), heightScreen),
                   ],
                 ),
               )
             ],
-          ),
-        ));
+          )
+        ),
+
+      ),
+    );
+  }
+
+  // Widget builds the display item with the proper formatting to display the user's info
+  Widget buildUserInfoDisplay(String getValue, String title, Widget editPage, var heightScreen) =>
+      Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: textDark,
+                ),
+              ),
+              SizedBox(
+                height: 1,
+              ),
+              Container(
+                  width: 350,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(
+                            color: primaryColor,
+                            width: 1,
+                          ))),
+                  child: Row(children: [
+                    Expanded(
+                        child: TextButton(
+                            onPressed: () {
+                              // navigateSecondPage(editPage);
+                              showModalBottomSheet(
+                                  context: context,
+                                  backgroundColor: thirdColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+                                  ),
+                                  builder: (context) {
+                                    return Scaffold(
+                                        body: SingleChildScrollView (
+                                            child: ConstrainedBox(
+                                                constraints: BoxConstraints(maxHeight: heightScreen),
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.all(16),
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          SizedBox(height: 20),
+                                                          TextField(
+                                                            decoration: InputDecoration(
+                                                                border: OutlineInputBorder(),
+                                                                isDense: true,
+                                                                hintText: 'Email',
+                                                            ),
+                                                            keyboardType: TextInputType.emailAddress,
+                                                          ),
+                                                          SizedBox(height: 32),
+                                                          SizedBox(
+                                                              width: double.infinity,
+                                                              height: 42,
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius.circular(12.0),
+                                                                child: ElevatedButton(
+                                                                  onPressed: (){
+                                                                    Navigator.of(context).pop();
+                                                                  },
+                                                                  child: Text(
+                                                                    'Simpan',
+                                                                    style: whiteTextStyle.copyWith(
+                                                                        fontSize: 20,
+                                                                        fontWeight: FontWeight.w500,
+                                                                        color: whiteColor),
+                                                                  ),
+                                                                  style: ElevatedButton.styleFrom(
+                                                                      primary: primaryColor,
+                                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                                                ),
+                                                              )
+                                                          ),
+                                                          SizedBox(height: 16),
+                                                          SizedBox(
+                                                              width: double.infinity,
+                                                              height: 42,
+                                                              child: ClipRRect(
+                                                                borderRadius: BorderRadius.circular(12.0),
+                                                                child: ElevatedButton(
+                                                                  onPressed: (){
+                                                                    Navigator.of(context).pop();
+                                                                  },
+                                                                  child: Text(
+                                                                    'Batal',
+                                                                    style: whiteTextStyle.copyWith(
+                                                                        fontSize: 20,
+                                                                        fontWeight: FontWeight.w500,
+                                                                        color: whiteColor),
+                                                                  ),
+                                                                  style: ElevatedButton.styleFrom(
+                                                                      primary: secondaryColor,
+                                                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                                                ),
+                                                              )
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                            )
+                                        )
+                                    );
+                                  });
+                            },
+                            child: Text(
+                              getValue,
+                              style: TextStyle(fontSize: 16, height: 1.4, color: textDark),
+                            ))),
+                    Icon(
+                      Icons.edit,
+                      color: primaryColor,
+                      size: 20.0,
+                    )
+                  ]
+                  )
+              )
+            ],
+          )
+      );
+
+  // Refrshes the Page after updating user info.
+  FutureOr onGoBack(dynamic value) {
+    setState(() {});
+  }
+
+  // Handles navigation and prompts refresh.
+  void navigateSecondPage(Widget editForm) {
+    Route route = MaterialPageRoute(builder: (context) => editForm);
+    Navigator.push(context, route).then(onGoBack);
   }
 }

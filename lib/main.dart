@@ -1,8 +1,7 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:silvya/pages/pages.dart';
 import 'package:silvya/shared/shared.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'dart:async';
 
 void main() {

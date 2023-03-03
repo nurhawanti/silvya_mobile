@@ -11,10 +11,30 @@ enum SampleItem { itemOne, itemTwo }
 
 class _HomePageState extends State<HomePage> {
   SampleItem? selectedMenu;
+  String barcode = "";
+  String username = "";
+  String nama = "";
+  String jabatan = "";
+  String prodi = "";
+  String foto = "";
+  String nim = "";
+  dynamic data;
+
+  // @override
+  // void initState() {
+  //   data = SessionManager().get("nama");
+  //   data.then((value) {
+  //     setState(() {
+  //       username = value;
+  //     });
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    getUser();
     return SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -40,7 +60,15 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(CupertinoIcons.barcode_viewfinder, size: 30),
+                          IconButton(
+                            iconSize: 30,
+                            icon: const Icon(CupertinoIcons.barcode_viewfinder),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const ScanQrPage(),
+                              ));
+                            },
+                          ),
                           PopupMenuButton<SampleItem>(
                             initialValue: selectedMenu,
                             // Callback that sets the selected popup menu item.
@@ -51,10 +79,11 @@ class _HomePageState extends State<HomePage> {
                                   MaterialPageRoute(builder: (context) => ProfilPage()),
                                 );
                               }else if(item == SampleItem.itemTwo){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => WelcomePage()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => WelcomePage()),
+                                // );
+                                logOut();
                               }
                             },
                             itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
@@ -93,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
                                 Text(
-                                  "Ragil Nurhawanti",
+                                  nama,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -103,7 +132,17 @@ class _HomePageState extends State<HomePage> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "Mahasiswa",
+                                  nim,
+                                  style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                      color: textDark),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  prodi,
                                   style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
@@ -341,5 +380,33 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ));
+  }
+
+  logOut() async {
+    await SessionManager().destroy();
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const WelcomePage(),
+      ),
+          (route) => false,
+    );
+  }
+
+  void getUser() async {
+    nama = await SessionManager().get("nama");
+    prodi = await SessionManager().get("prodi");
+    foto = await SessionManager().get("foto");
+    int temp_nim = await SessionManager().get("nim");
+    int temp_username = await SessionManager().get("username");
+
+    setState(() {
+      nama = nama.toString();
+      prodi = prodi.toString();
+      foto = foto.toString();
+      nim = "$temp_nim";
+      username = "$temp_username";
+    });
   }
 }

@@ -9,8 +9,6 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int pageIndex = 0;
-
-
   List<Widget> pages = [
     HomePage(),
     KeluhanPage(),
@@ -46,14 +44,20 @@ class _DashboardPageState extends State<DashboardPage> {
                           leading: Icon(CupertinoIcons.doc_on_doc_fill),
                           title: Text('Pengajuan SIJ'),
                           onTap: () {
-                            print('Send email');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PengajuanSijPage()),
+                            );
                           },
                         ),
                         ListTile(
                           leading: Icon(CupertinoIcons.pencil_ellipsis_rectangle),
                           title: Text('Pengaduan Layanan'),
                           onTap: () {
-                            print('Call phone');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PengaduanKeluhanPage()),
+                            );
                           },
                         ),
                         ListTile(
@@ -95,6 +99,7 @@ class _DashboardPageState extends State<DashboardPage> {
       CupertinoIcons.doc_on_doc_fill,
       CupertinoIcons.book,
     ];
+
     return AnimatedBottomNavigationBar(
         backgroundColor: primaryColor,
         icons: iconItems,
