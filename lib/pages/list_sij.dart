@@ -13,21 +13,21 @@ class _ListSijPageState extends State<ListSijPage> {
   late Future data;
   List<Sij> sij = [];
 
-  String id = '1997251020222002';
-
   @override
   void initState() {
-    data = ApiService().getSij(id);
+    data = ApiService().getSij();
     data.then((value) {
       setState(() {
+        sij = value;
+
         if(widget.status == 'akademik'){
-          sij = sij.where((element) => element.stt.toString() == '1' && element.accProdi.toString() == '0' && element.accProdi.toString() != 'null').toList();
+          sij = sij.where((element) => (element.stt.toString() == '1' || element.stt.toString() == '3') && element.acc_prodi.toString() == '0' && element.acc_prodi.toString() != 'null').toList();
         }else if(widget.status == 'prodi'){
-          sij = sij.where((element) => element.stt.toString() == '1' && element.accProdi.toString() == 'null').toList();
+          sij = sij.where((element) => element.stt.toString() == '1' && element.acc_prodi.toString() == 'null').toList();
         }else if(widget.status == 'disetujui'){
-          sij = sij.where((element) => element.stt.toString() == '0' && element.accProdi.toString() == '0').toList();
+          sij = sij.where((element) => element.stt.toString() == '0' && element.acc_prodi.toString() == '0').toList();
         }else if(widget.status == 'ditolak'){
-          sij = sij.where((element) => element.stt.toString() == '2' && element.accProdi.toString() == '2').toList();
+          sij = sij.where((element) => element.stt.toString() == '2' || element.acc_prodi.toString() == '2').toList();
         }else{
           sij = value;
         }
@@ -63,6 +63,9 @@ class _ListSijPageState extends State<ListSijPage> {
             children: [
               Row(
                 children: [
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(
@@ -85,6 +88,20 @@ class _ListSijPageState extends State<ListSijPage> {
                         padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                         child: Row(
                           children: [
+                            (sij[index].stt == '0' && sij[index].acc_prodi == '0')?
+                            Container(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                  child:
+                                  InkWell(
+                                    // onTap: () => downloadFile,
+                                    child: Icon(Icons.file_copy_outlined,color: primaryColor, size: 40,)),
+                                  )
+                            ):
+                            SizedBox(
+                              width: 0,
+                            ),
                             Expanded(
                               child: Container(
                                 width: (size.width - 90) * 0.7,

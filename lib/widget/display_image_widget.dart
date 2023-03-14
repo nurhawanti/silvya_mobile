@@ -31,9 +31,9 @@ class DisplayImage extends StatelessWidget {
 
   // Builds Profile Image
   Widget buildImage(Color color) {
-    final image = imagePath.contains('https://')
+    final image = imagePath.contains('png') || imagePath.contains('jpg')
         ? NetworkImage(imagePath)
-        : FileImage(File(imagePath));
+        : AssetImage('assets/images/akun.png') as ImageProvider;
 
     return CircleAvatar(
       radius: 75,

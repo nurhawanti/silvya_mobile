@@ -110,9 +110,11 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/logo.png"),
-                                    fit: BoxFit.cover)),
+                                    image: (foto != 'null')? NetworkImage(
+                                        "http://192.168.137.219/silvya/operatorkantin/assets/media/profil/$foto")
+                                        :AssetImage('assets/images/akun.png') as ImageProvider,
+                                    fit: BoxFit.cover)
+                            ),
                           ),
                           SizedBox(
                             height: 10,
@@ -153,87 +155,87 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                "1",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: primaryColor),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "SIJ",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: textDark),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            width: 0.5,
-                            height: 40,
-                            color: blackColor.withOpacity(0.3),
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "5",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: primaryColor),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Keluhan",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: textDark),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            width: 0.5,
-                            height: 40,
-                            color: blackColor.withOpacity(0.3),
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "12",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: primaryColor),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "Makan",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: textDark),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
+                      // SizedBox(
+                      //   height: 50,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                      //     Column(
+                      //       children: [
+                      //         Text(
+                      //           "1",
+                      //           style: TextStyle(
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w700,
+                      //               color: primaryColor),
+                      //         ),
+                      //         SizedBox(
+                      //           height: 5,
+                      //         ),
+                      //         Text(
+                      //           "SIJ",
+                      //           style: TextStyle(
+                      //               fontSize: 12,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: textDark),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     Container(
+                      //       width: 0.5,
+                      //       height: 40,
+                      //       color: blackColor.withOpacity(0.3),
+                      //     ),
+                      //     Column(
+                      //       children: [
+                      //         Text(
+                      //           "5",
+                      //           style: TextStyle(
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w700,
+                      //               color: primaryColor),
+                      //         ),
+                      //         SizedBox(
+                      //           height: 5,
+                      //         ),
+                      //         Text(
+                      //           "Keluhan",
+                      //           style: TextStyle(
+                      //               fontSize: 12,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: textDark),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     Container(
+                      //       width: 0.5,
+                      //       height: 40,
+                      //       color: blackColor.withOpacity(0.3),
+                      //     ),
+                      //     Column(
+                      //       children: [
+                      //         Text(
+                      //           "12",
+                      //           style: TextStyle(
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w700,
+                      //               color: primaryColor),
+                      //         ),
+                      //         SizedBox(
+                      //           height: 5,
+                      //         ),
+                      //         Text(
+                      //           "Makan",
+                      //           style: TextStyle(
+                      //               fontSize: 12,
+                      //               fontWeight: FontWeight.w500,
+                      //               color: textDark),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),

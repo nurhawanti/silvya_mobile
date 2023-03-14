@@ -1,28 +1,31 @@
 part of 'pages.dart';
 
-class ListKeluhanPage extends StatefulWidget {
+class ListPesanMakananPage extends StatefulWidget {
   late String status;
 
-  ListKeluhanPage({required this.status});
+  ListPesanMakananPage({required this.status});
 
   @override
-  State<ListKeluhanPage> createState() => _ListKeluhanPageState();
+  State<ListPesanMakananPage> createState() => _ListPesanMakananPageState();
 }
 
-class _ListKeluhanPageState extends State<ListKeluhanPage> {
+class _ListPesanMakananPageState extends State<ListPesanMakananPage> {
   late Future data;
-  List<Keluhan> keluhan = [];
-  String stat = "";
+  List<Pesanan> pesanan = [];
 
   @override
   void initState() {
-    data = ApiService().getKeluhan();
+    data = ApiService().getPesanan();
     data.then((value) {
       setState(() {
-        keluhan = value;
-
-        if(widget.status != ''){
-          keluhan = keluhan.where((element) => element.stt.toString() == widget.status).toList();
+        if(widget.status == 'pagi'){
+          pesanan = pesanan.where((element) => element.idshift.toString() == '1').toList();
+        }else if(widget.status == 'siang'){
+          pesanan = pesanan.where((element) => element.idshift.toString() == '2').toList();
+        }else if(widget.status == 'sore'){
+          pesanan = pesanan.where((element) => element.idshift.toString() == '3').toList();
+        }else{
+          pesanan = value;
         }
 
       });
@@ -34,31 +37,22 @@ class _ListKeluhanPageState extends State<ListKeluhanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: thirdColor,
-      body: keluhan.length == 0?Center(child: Text("Data Tidak Ditemukan"),)
+      body: pesanan.length == 0?
+      Center(child: Text("Data Tidak Ditemukan"),)
+      // Center(child: CircularProgressIndicator(color: secondaryColor,),)
           :
       getBody(),
     );
   }
 
-  String _status($stt, $konfirmasi){
-    if($stt == '2'){
-      return "Selesai";
-    }else if($stt == '4'){
-      return "Laporan Ditolak";
-    }else if($stt == '3'){
-      return "Proses Tindak Lanjut";
-    }else{
-      return "Menunggu Konfirmasi";
-    }
-  }
-
   Widget getBody(){
     var size = MediaQuery.of(context).size;
+    final format = DateFormat("dd MMMM yyyy");
 
     return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
-        itemCount: keluhan.length,
+        itemCount: pesanan.length,
         itemBuilder: (context, index){
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +89,7 @@ class _ListKeluhanPageState extends State<ListKeluhanPage> {
                                     crossAxisAlignment:CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        keluhan[index].keluhan,
+                                        pesanan[index].namaproduk,
                                         style: TextStyle(
                                             fontSize: 15,
                                             color: textDark,
@@ -105,7 +99,7 @@ class _ListKeluhanPageState extends State<ListKeluhanPage> {
                                         height: 5,
                                       ),
                                       Text(
-                                        keluhan[index].lapor,
+                                        pesanan[index].idjalur,
                                         style: TextStyle(
                                             fontSize: 12,
                                             color: textDark.withOpacity(0.8),
@@ -113,23 +107,6 @@ class _ListKeluhanPageState extends State<ListKeluhanPage> {
                                       ),
                                       SizedBox(
                                         height: 5,
-                                      ),
-                                      Text(
-                                        "Status: "+_status(keluhan[index].stt, keluhan[index].konfirmasi),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: textDark.withOpacity(0.8),
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        "Tanggal Laporan: "+keluhan[index].tgl.toString(),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: textDark.withOpacity(0.8),
-                                            fontWeight: FontWeight.w400),
                                       ),
                                     ]),
                               ),

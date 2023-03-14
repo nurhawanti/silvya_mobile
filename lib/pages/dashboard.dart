@@ -64,7 +64,10 @@ class _DashboardPageState extends State<DashboardPage> {
                           leading: Icon(Icons.fastfood_outlined),
                           title: Text('Pesan Makanan'),
                           onTap: () {
-                            print('Call phone');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PesanMakanPage()),
+                            );
                           },
                         ),
                       ],

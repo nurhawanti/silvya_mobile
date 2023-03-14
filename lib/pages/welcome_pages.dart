@@ -298,7 +298,7 @@ class _WelcomePageState extends State<WelcomePage>{
 
     try {
       final response = await http.post(
-          Uri.parse("https://silvya.akamigas.ac.id/operatorkantin/index.php/authentication/login"),
+          Uri.parse("http://192.168.137.219/silvya/operatorkantin/index.php/authentication/login"),
           headers: {'Content-Type': 'application/json; charset=UTF-8'},
           body: jsonEncode({
             "username": username,
@@ -337,17 +337,6 @@ class _WelcomePageState extends State<WelcomePage>{
   }
 
   saveSession(Pengguna pengguna) async {
-    // SharedPreferences pref = await SharedPreferences.getInstance();
-    // await pref.setString("username", pengguna.username.toString());
-    // await pref.setString("nama", pengguna.nama.toString());
-    // await pref.setString("nim", pengguna.nim.toString());
-    // await pref.setString("jabatan", pengguna.jabatan.toString());
-    // await pref.setString("email", pengguna.email.toString());
-    // await pref.setString("alamat", pengguna.alamat.toString());
-    // await pref.setString("prodi", pengguna.prodi.toString());
-    // await pref.setString("foto", pengguna.foto.toString());
-    // await pref.setString("tlp", pengguna.tlp.toString());
-    // await pref.setBool("is_login", true);
     var sessionManager = SessionManager();
     await sessionManager.set("is_login", true);
     await sessionManager.set("username", pengguna.username.toString());
@@ -356,6 +345,9 @@ class _WelcomePageState extends State<WelcomePage>{
     await sessionManager.set("prodi", pengguna.prodi.toString());
     await sessionManager.set("foto", pengguna.foto.toString());
     await sessionManager.set("nim", pengguna.nim.toString());
+    await sessionManager.set("email", pengguna.email.toString());
+    await sessionManager.set("tlp", pengguna.tlp.toString());
+    await sessionManager.set("id", pengguna.id.toString());
 
     Navigator.pushAndRemoveUntil(
       context,

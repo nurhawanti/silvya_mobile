@@ -18,9 +18,9 @@ class Pengguna {
     required this.prodi,
     required this.username,
     required this.password,
-    this.foto,
+    required this.foto,
     required this.nim,
-    this.tlp,
+    required this.tlp,
     required this.stt,
   });
 
@@ -32,9 +32,9 @@ class Pengguna {
   String prodi;
   String username;
   String password;
-  dynamic foto;
+  String foto;
   String nim;
-  dynamic tlp;
+  String tlp;
   String stt;
 
   factory Pengguna.fromJson(Map<String, dynamic> json) => Pengguna(

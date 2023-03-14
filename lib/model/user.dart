@@ -1,35 +1,69 @@
+// To parse this JSON data, do
+//
+//     final user = userFromJson(jsonString);
+
+import 'dart:convert';
+
+User userFromJson(String str) => User.fromJson(json.decode(str));
+
+String userToJson(User data) => json.encode(data.toJson());
+
 class User {
   User({
     required this.id,
+    required this.alamat,
+    required this.jabatan,
     required this.nama,
-    required this.nim,
+    required this.email,
+    required this.prodi,
     required this.username,
     required this.password,
-    required this.email,
-    required this.tlp,
     required this.foto,
-    required this.prodi,
+    required this.nim,
+    required this.tlp,
+    required this.stt,
   });
 
-  int id;
+  String id;
+  String alamat;
+  String jabatan;
   String nama;
-  String nim;
+  String email;
+  String prodi;
   String username;
   String password;
-  String email;
-  String tlp;
   String foto;
-  String prodi;
+  String nim;
+  String tlp;
+  String stt;
 
-  factory User.fromMap(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"],
+    alamat: json["alamat"],
+    jabatan: json["jabatan"],
     nama: json["nama"],
-    nim: json["nim"],
+    email: json["email"],
+    prodi: json["prodi"],
     username: json["username"],
     password: json["PASSWORD"],
-    email: json["email"],
-    tlp: json["tlp"],
     foto: json["foto"],
-    prodi: json["prodi"],
+    nim: json["nim"],
+    tlp: json["tlp"],
+    stt: json["stt"],
   );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "alamat": alamat,
+    "jabatan": jabatan,
+    "nama": nama,
+    "email": email,
+    "prodi": prodi,
+    "username": username,
+    "PASSWORD": password,
+    "foto": foto,
+    "nim": nim,
+    "tlp": tlp,
+    "stt": stt,
+  };
 }

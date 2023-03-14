@@ -19,7 +19,7 @@ class Sij {
     required this.jamkembali,
     this.ketlain,
     this.idacc,
-    this.accProdi,
+    this.acc_prodi,
     required this.template,
   });
 
@@ -36,7 +36,7 @@ class Sij {
   String jamkembali;
   dynamic ketlain;
   dynamic idacc;
-  dynamic accProdi;
+  dynamic acc_prodi;
   String template;
 
   factory Sij.fromJson(Map<String, dynamic> json) => Sij(
@@ -53,7 +53,7 @@ class Sij {
     jamkembali: json["jamkembali"],
     ketlain: json["ketlain"],
     idacc: json["idacc"],
-    accProdi: json["acc_prodi"],
+    acc_prodi: json["acc_prodi"],
     template: json["template"],
   );
 
@@ -71,7 +71,7 @@ class Sij {
     "jamkembali": jamkembali,
     "ketlain": ketlain,
     "idacc": idacc,
-    "acc_prodi": accProdi,
+    "acc_prodi": acc_prodi,
     "template": template,
   };
 }

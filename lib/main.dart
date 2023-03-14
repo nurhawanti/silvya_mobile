@@ -4,7 +4,8 @@ import 'package:silvya/pages/pages.dart';
 import 'package:silvya/shared/shared.dart';
 import 'dart:async';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

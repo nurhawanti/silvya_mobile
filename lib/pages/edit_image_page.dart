@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:silvya/model/user_data.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:silvya/widget/appbar_widget.dart';
@@ -15,10 +16,21 @@ class EditImagePage extends StatefulWidget {
 }
 
 class _EditImagePageState extends State<EditImagePage> {
-  var user = UserData.myUser;
+  // var user = UserData.myUser;
+  String username = "";
+  String nama = "";
+  String jabatan = "";
+  String prodi = "";
+  String foto = "";
+  String nim = "";
+  String email = "";
+  String tlp = "";
+  File newFoto= new File('');
+  String location = "";
 
   @override
   Widget build(BuildContext context) {
+    getUser();
     return Scaffold(
       appBar: buildAppBar(context),
       body: Column(
@@ -28,7 +40,7 @@ class _EditImagePageState extends State<EditImagePage> {
           SizedBox(
               width: 330,
               child: const Text(
-                "Upload a photo of yourself:",
+                "Ubah Foto Profil Anda:",
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
@@ -40,20 +52,10 @@ class _EditImagePageState extends State<EditImagePage> {
                   width: 330,
                   child: GestureDetector(
                     onTap: () async {
-                      final image = await ImagePicker()
-                          .pickImage(source: ImageSource.gallery);
-
-                      if (image == null) return;
-
-                      final location = await getApplicationDocumentsDirectory();
-                      final name = basename(image.path);
-                      final imageFile = File('${location.path}/$name');
-                      // final newImage =
-                      // await File(image.path).copy(imageFile.path);
-                      // setState(
-                      //         () => user = user.copy(imagePath: newImage.path));
+                      _getFromGallery();
                     },
-                    child: Image.network(user.foto),
+                    child: (foto != null)?(location != '')?Image.file(newFoto):Image.network("http://192.168.137.219/silvya/operatorkantin/assets/media/profil/$foto")
+                    :Image.asset('assets/images/akun.png'),
                   ))),
           Padding(
               padding: EdgeInsets.only(top: 40),
@@ -65,7 +67,7 @@ class _EditImagePageState extends State<EditImagePage> {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Text(
-                        'Update',
+                        'Simpan',
                         style: TextStyle(fontSize: 15),
                       ),
                     ),
@@ -73,5 +75,56 @@ class _EditImagePageState extends State<EditImagePage> {
         ],
       ),
     );
+  }
+
+  void getUser() async {
+    nama = await SessionManager().get("nama");
+    prodi = await SessionManager().get("prodi");
+    foto = await SessionManager().get("foto");
+    email = await SessionManager().get("email");
+    int temp_tlp = await SessionManager().get("tlp");
+    int temp_nim = await SessionManager().get("nim");
+    int temp_username = await SessionManager().get("username");
+
+    setState(() {
+      nama = nama.toString();
+      prodi = prodi.toString();
+      foto = foto.toString();
+      tlp = "$temp_tlp";
+      email = email.toString();
+      nim = "$temp_nim";
+      username = "$temp_username";
+    });
+  }
+
+  /// Get from gallery
+  _getFromGallery() async {
+      try {
+        final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+        if(image == null) return;
+
+        final imageTemp = File(image.path);
+        // setState(() => newFoto = imageTemp);
+        setState(() {
+          newFoto = imageTemp;
+          location = image.path.toString();
+        });
+      } on PlatformException catch(e) {
+        print('Gagal Mengunggah Gambar: $e');
+      }
+  }
+
+  /// Get from Camera
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        newFoto = File(pickedFile.path);
+      });
+    }
   }
 }
